@@ -1,0 +1,49 @@
+---
+import PricingCard from "./pricing-card.astro";
+
+const trialPlan = {
+  name: "Try for free",
+  price: "14 days",
+  features: ["All features"],
+};
+
+const plan = {
+  name: "The only plan",
+  period: "/month",
+  price: {
+    monthly: "€ 24.90",
+    annual: "€ 249.00",
+    original: "€ 298.80",
+  },
+  popular: true,
+  features: ["All features", "Price per user", "24h support"],
+  button: {
+    text: "Get Started",
+    link: "https://app.usezenit.com",
+  },
+};
+---
+
+<section id="pricing">
+  <div class="mt-16 md:mt-36 mb-12 text-center">
+    <h2 class="text-4xl lg:text-5xl font-bold lg:tracking-tight">Pricing</h2>
+    <p class="mt-2 text-zinc-500">No complex plans. Just 1 plan.</p>
+  </div>
+
+  <div class="text-center mb-12">
+    Pssst! Save
+    <span
+      class="bg-gradient-to-r from-purple-500 to-pink-600 text-white px-1.5 py-0.5 rounded-md">
+      2 months</span
+    > with the annual plan!
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-3 place-content-center">
+    <PricingCard
+      plan={trialPlan}
+      class="border-b-0 md:border-r-0 md:border-b rounded-b-none md:rounded-l-md md:rounded-r-none mx-auto md:mx-0 md:my-8 justify-self-end w-[80%] md:w-auto px-16 border-opacity-50"
+    />
+
+    <PricingCard plan={plan} class="shadow-xl" />
+  </div>
+</section>

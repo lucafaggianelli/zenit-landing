@@ -4,55 +4,37 @@ import { Icon } from "astro-icon/components";
 
 const features = [
   {
-    title: "Bring Your Own Framework",
+    title: "Invoice Automation",
     description:
-      "Build your site using React, Svelte, Vue, Preact, web components, or just plain ol' HTML + JavaScript.",
+      "Generate and send invoices with zero hassle. Zenit learns your billing cycles and client specifics to automate the entire process.",
     icon: "bx:bxs-briefcase",
   },
   {
-    title: "100% Static HTML, No JS",
+    title: "Bank Synchronization",
     description:
-      "Astro renders your entire page to static HTML, removing all JavaScript from your final build by default.",
+      "Connect Zenit to your bank accounts for real-time updates on your business financials. Our smart system matches transactions to expenses automatically.",
     icon: "bx:bxs-window-alt",
   },
   {
-    title: "On-Demand Components",
+    title: "Effortless Proposals",
     description:
-      "Need some JS? Astro can automatically hydrate interactive components when they become visible on the page.  ",
+      "Create compelling proposals quickly using templates tailored to your services and client needs.",
     icon: "bx:bxs-data",
   },
   {
-    title: "Broad Integration",
+    title: "Intelligent Task Manager",
     description:
-      "Astro supports TypeScript, Scoped CSS, CSS Modules, Sass, Tailwind, Markdown, MDX, and any other npm packages.",
+      "Never miss a deadline or forget a follow-up with Zenit’s AI-driven task manager, which organizes your schedule efficiently.",
     icon: "bx:bxs-bot",
-  },
-  {
-    title: "SEO Enabled",
-    description:
-      "Automatic sitemaps, RSS feeds, pagination and collections take the pain out of SEO and syndication. It just works!",
-    icon: "bx:bxs-file-find",
-  },
-  {
-    title: "Community",
-    description:
-      "Astro is an open source project powered by hundreds of contributors making thousands of individual contributions.",
-    icon: "bx:bxs-user",
   },
 ];
 ---
 
-<div class="mt-16 md:mt-0">
-  <h2 class="text-4xl lg:text-5xl font-bold lg:tracking-tight">
-    Everything you need to start a website
-  </h2>
-  <p class="text-lg mt-4 text-slate-600">
-    Astro comes batteries included. It takes the best parts of state-of-the-art
-    tools and adds its own innovations.
-  </p>
+<div id="features" class="mt-16 md:mt-36 text-center">
+  <h2 class="text-4xl lg:text-5xl font-bold lg:tracking-tight">Features</h2>
 </div>
 
-<div class="grid sm:grid-cols-2 md:grid-cols-3 mt-16 gap-16">
+<div class="grid sm:grid-cols-2 max-w-screen-md mx-auto mt-16 gap-16">
   {
     features.map((item) => (
       <div class="flex gap-4 items-start">
