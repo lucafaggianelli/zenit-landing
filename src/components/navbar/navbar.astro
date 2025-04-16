@@ -1,8 +1,9 @@
 ---
+import { Astronav, MenuItems, MenuIcon, StickyHeader } from "astro-navbar";
+
 import Container from "@/components/container.astro";
 import Link from "@/components/ui/link.astro";
 import Dropdown from "./dropdown.astro";
-import { Astronav, MenuItems, MenuIcon, StickyHeader } from "astro-navbar";
 
 interface MenuItem {
   title: string;
@@ -39,15 +40,16 @@ const menuitems: MenuItem[] = [
   <Container class="lg:flex justify-between">
     <Astronav>
       <div class="flex w-full lg:w-auto items-center justify-between">
-        <a href="/" class="text-lg"
-          ><span class="font-medium text-slate-700 uppercase">Zenit</span>
+        <a href="/" class="inline-flex items-center gap-4">
+          <img src="/logo.png" alt="Zenit logo" class="size-8" />
+          <span class="text-slate-600 uppercase tracking-wider">Zenit</span>
         </a>
         <div class="block lg:hidden">
           <MenuIcon class="w-4 h-4 text-gray-800" />
         </div>
       </div>
       <MenuItems class="hidden w-full lg:w-auto mt-2 lg:flex lg:mt-0">
-        <ul class="flex flex-col lg:flex-row lg:gap-3 text-sm items-center">
+        <ul class="flex flex-col lg:flex-row lg:gap-3 items-center">
           {
             menuitems.map((item, index) => (
               <>
