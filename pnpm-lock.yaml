@@ -29,6 +29,9 @@ importers:
       '@iconify-json/uil':
         specifier: ^1.2.3
         version: 1.2.3
+      '@lucide/astro':
+        specifier: ^0.488.0
+        version: 0.488.0(astro@5.7.1(@types/node@22.14.1)(jiti@2.4.2)(lightningcss@1.29.2)(rollup@4.40.0)(typescript@5.8.3)(yaml@2.7.1))
       '@tailwindcss/typography':
         specifier: ^0.5.16
         version: 0.5.16(tailwindcss@4.1.4)
@@ -434,6 +437,11 @@ packages:
 
   '@jridgewell/sourcemap-codec@1.5.0':
     resolution: {integrity: sha512-gv3ZRaISU3fjPAgNsriBRqGWQL6quFx04YMPW/zD8XMLsU32mhCCbfbO6KZFLjvYpCZ8zyDEgqsgf+PwPaM7GQ==}
+
+  '@lucide/astro@0.488.0':
+    resolution: {integrity: sha512-kJ9kpHr8khwpOmbYKtWrRwB563Gu6RIv94QAbMJ60f5NSIoxcWkV4nijjijFeE24EJ/mXiGQZO4p9P5S+E5iSg==}
+    peerDependencies:
+      astro: ^4 || ^5
 
   '@mdx-js/mdx@3.1.0':
     resolution: {integrity: sha512-/QxEhPAvGwbQmy1Px8F899L5Uc2KZ6JtXwlCgJmjSTBedwOZkByYcBG4GceIGPXRDsmfxhHazuS+hlOShRLeDw==}
@@ -2911,6 +2919,10 @@ snapshots:
     optional: true
 
   '@jridgewell/sourcemap-codec@1.5.0': {}
+
+  '@lucide/astro@0.488.0(astro@5.7.1(@types/node@22.14.1)(jiti@2.4.2)(lightningcss@1.29.2)(rollup@4.40.0)(typescript@5.8.3)(yaml@2.7.1))':
+    dependencies:
+      astro: 5.7.1(@types/node@22.14.1)(jiti@2.4.2)(lightningcss@1.29.2)(rollup@4.40.0)(typescript@5.8.3)(yaml@2.7.1)
 
   '@mdx-js/mdx@3.1.0(acorn@8.14.1)':
     dependencies:

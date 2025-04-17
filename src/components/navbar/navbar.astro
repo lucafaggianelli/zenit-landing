@@ -4,6 +4,7 @@ import { Astronav, MenuItems, MenuIcon, StickyHeader } from "astro-navbar";
 import Container from "@/components/container.astro";
 import Link from "@/components/ui/link.astro";
 import Dropdown from "./dropdown.astro";
+import { Icon } from "astro-icon/components";
 
 interface MenuItem {
   title: string;
@@ -96,8 +97,14 @@ const menuitems: MenuItem[] = [
           href="https://app.usezenit.com"
           size="md"
           target="_blank"
-          rel="noopener">Log in</Link
-        >
+          rel="noopener"
+          class="group flex items-center gap-1"
+          >Log in
+          <Icon
+            name="bx:chevron-right"
+            class="group-hover:translate-x-1 transition-transform size-5"
+          />
+        </Link>
       </div>
     </div>
   </Container>

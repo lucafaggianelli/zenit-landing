@@ -1,0 +1,68 @@
+---
+import LandmarkIcon from "@lucide/astro/icons/landmark";
+import MailIcon from "@lucide/astro/icons/mail";
+import UnplugIcon from "@lucide/astro/icons/unplug";
+import ReceiptTextIcon from "@lucide/astro/icons/receipt-text";
+import FileIcon from "@lucide/astro/icons/file";
+import ChartIcon from "@lucide/astro/icons/chart-no-axes-combined";
+
+import Beam from "./beam.astro";
+---
+
+<div class="relative max-w-xl mx-auto">
+  <Beam containerId="automations" fromId="bank-node" toId="zenit-node" />
+  <Beam containerId="automations" fromId="email-node" toId="zenit-node" />
+  <Beam containerId="automations" fromId="api-node" toId="zenit-node" />
+  <Beam containerId="automations" fromId="invoice-node" toId="zenit-node" />
+  <Beam containerId="automations" fromId="expense-node" toId="zenit-node" />
+  <Beam containerId="automations" fromId="planning-node" toId="zenit-node" />
+
+  <div id="automations" class="relative grid grid-cols-3 items-center my-24">
+    <div class="flex flex-col gap-16 items-start text-zinc-800">
+      <div
+        class="border-2 rounded-full p-2 bg-white outline-4 outline-zinc-100"
+        id="bank-node">
+        <LandmarkIcon size={36} stroke-width={1.5} />
+      </div>
+
+      <div
+        class="border-2 rounded-full p-2 bg-white outline-4 outline-zinc-100"
+        id="email-node">
+        <MailIcon size={36} stroke-width={1.5} />
+      </div>
+
+      <div
+        class="border-2 rounded-full p-2 bg-white outline-4 outline-zinc-100"
+        id="api-node">
+        <UnplugIcon size={36} stroke-width={1.5} />
+      </div>
+    </div>
+
+    <div class="place-self-center">
+      <div
+        class="border-2 rounded p-2 bg-white outline-4 outline-zinc-100"
+        id="zenit-node">
+        <img src="/logo.png" alt="Zenit logo" class="size-8" />
+      </div>
+    </div>
+
+    <div class="flex flex-col gap-16 items-end text-zinc-800">
+      <div
+        class="border-2 rounded-full p-2 bg-white outline-4 outline-zinc-100"
+        id="invoice-node">
+        <FileIcon size={36} stroke-width={1.5} />
+      </div>
+
+      <div
+        class="border-2 rounded-full p-2 bg-white outline-4 outline-zinc-100"
+        id="expense-node">
+        <ReceiptTextIcon size={36} stroke-width={1.5} />
+      </div>
+
+      <div
+        class="border-2 rounded-full p-2 bg-white outline-4 outline-zinc-100"
+        id="planning-node">
+        <ChartIcon size={36} stroke-width={1.5} />
+      </div>
+  </div>
+</div>

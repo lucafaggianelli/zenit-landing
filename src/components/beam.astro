@@ -1,0 +1,247 @@
+---
+interface Props {
+  containerId: string;
+  fromId: string;
+  toId: string;
+  className?: string;
+  curvature?: number;
+  reverse?: boolean;
+  pathColor?: string;
+  pathWidth?: number;
+  pathOpacity?: number;
+  gradientStartColor?: string;
+  gradientStopColor?: string;
+  delay?: number;
+  duration?: number;
+  startXOffset?: number;
+  startYOffset?: number;
+  endXOffset?: number;
+  endYOffset?: number;
+}
+
+const {
+  containerId,
+  fromId,
+  toId,
+  className,
+  curvature = 0,
+  reverse = false,
+  duration = Math.random() * 3 + 4,
+  delay = 0,
+  pathColor = "gray",
+  pathWidth = 2,
+  pathOpacity = 0.2,
+  gradientStartColor = "#ffaa40",
+  gradientStopColor = "#9c40ff",
+  startXOffset = 0,
+  startYOffset = 0,
+  endXOffset = 0,
+  endYOffset = 0,
+} = Astro.props;
+
+const id = `beam-${Math.random().toString(36).substring(2, 9)}`;
+
+const gradientCoordinates = reverse
+  ? {
+      x1: ["90%", "-10%"],
+      x2: ["100%", "0%"],
+      y1: ["0%", "0%"],
+      y2: ["0%", "0%"],
+    }
+  : {
+      x1: ["10%", "110%"],
+      x2: ["0%", "100%"],
+      y1: ["0%", "0%"],
+      y2: ["0%", "0%"],
+    };
+---
+
+<svg
+  data-container-id={containerId}
+  data-from-id={fromId}
+  data-to-id={toId}
+  data-curvature={curvature}
+  data-starx-offset={startXOffset}
+  data-start-y-offset={startYOffset}
+  data-end-x-offset={endXOffset}
+  data-end-y-offset={endYOffset}
+  fill="none"
+  width="0"
+  height="0"
+  xmlns="http://www.w3.org/2000/svg"
+  class:list={[
+    "beam-container pointer-events-none absolute left-0 top-0 transform-gpu stroke-2",
+    className,
+  ]}
+  viewBox="0 0 0 0">
+  <path
+    class="path-background"
+    d=""
+    stroke={pathColor}
+    stroke-width={pathWidth}
+    stroke-opacity={pathOpacity}
+    stroke-linecap="round"></path>
+  <path
+    class="path-gradient"
+    d=""
+    stroke-width={pathWidth}
+    stroke={`url(#${id})`}
+    stroke-opacity="1"
+    stroke-linecap="round"></path>
+  <defs>
+    <linearGradient
+      class="transform-gpu"
+      id={id}
+      gradientUnits={"userSpaceOnUse"}>
+      <animate
+        attributeName="x1"
+        values={gradientCoordinates.x1.join(";")}
+        dur={`${duration}s`}
+        repeatCount="indefinite"
+        begin={`${delay}s`}
+        calcMode="spline"
+        keySplines="0.16 1 0.3 1"></animate>
+      <animate
+        attributeName="x2"
+        values={gradientCoordinates.x2.join(";")}
+        dur={`${duration}s`}
+        repeatCount="indefinite"
+        begin={`${delay}s`}
+        calcMode="spline"
+        keySplines="0.16 1 0.3 1"></animate>
+      <animate
+        attributeName="y1"
+        values={gradientCoordinates.y1.join(";")}
+        dur={`${duration}s`}
+        repeatCount="indefinite"
+        begin={`${delay}s`}
+        calcMode="spline"
+        keySplines="0.16 1 0.3 1"></animate>
+      <animate
+        attributeName="y2"
+        values={gradientCoordinates.y2.join(";")}
+        dur={`${duration}s`}
+        repeatCount="indefinite"
+        begin={`${delay}s`}
+        calcMode="spline"
+        keySplines="0.16 1 0.3 1"></animate>
+      <stop stop-color={gradientStartColor} stop-opacity="0"></stop>
+      <stop stop-color={gradientStartColor}></stop>
+      <stop offset="32.5%" stop-color={gradientStopColor}></stop>
+      <stop offset="100%" stop-color={gradientStopColor} stop-opacity="0"
+      ></stop>
+    </linearGradient>
+  </defs>
+</svg>
+
+<script>
+  function updatePath(
+    containerElement: HTMLElement,
+    svgElement: SVGElement,
+    fromElement: HTMLElement,
+    toElement: HTMLElement,
+    options: {
+      curvature: number;
+      startXOffset: number;
+      startYOffset: number;
+      endXOffset: number;
+      endYOffset: number;
+    } = {
+      curvature: 0,
+      startXOffset: 0,
+      startYOffset: 0,
+      endXOffset: 0,
+      endYOffset: 0,
+    }
+  ) {
+    const containerRect = containerElement.getBoundingClientRect();
+    const rectA = fromElement.getBoundingClientRect();
+    const rectB = toElement.getBoundingClientRect();
+
+    const svgWidth = containerRect.width;
+    const svgHeight = containerRect.height;
+    const svgDimensions = { width: svgWidth, height: svgHeight };
+
+    const startX =
+      rectA.left - containerRect.left + rectA.width / 2 + options.startXOffset;
+    const startY =
+      rectA.top - containerRect.top + rectA.height / 2 + options.startYOffset;
+    const endX =
+      rectB.left - containerRect.left + rectB.width / 2 + options.endXOffset;
+    const endY =
+      rectB.top - containerRect.top + rectB.height / 2 + options.endYOffset;
+
+    const controlY = startY - options.curvature;
+    let pathD = `M ${startX},${startY} Q ${
+      (startX + endX) / 2
+    },${controlY} ${endX},${endY}`;
+
+    svgElement.setAttribute("width", svgDimensions.width.toString());
+    svgElement.setAttribute("height", svgDimensions.height.toString());
+    svgElement.setAttribute(
+      "viewBox",
+      `0 0 ${svgDimensions.width} ${svgDimensions.height}`
+    );
+    const pathBackground =
+      svgElement.getElementsByClassName("path-background")[0];
+    const pathGradient = svgElement.getElementsByClassName("path-gradient")[0];
+    pathBackground?.setAttribute("d", pathD);
+    pathGradient?.setAttribute("d", pathD);
+    const pathElements = svgElement.querySelectorAll("path");
+    pathElements.forEach((path) => {
+      path.setAttribute("d", pathD);
+    });
+  }
+
+  const svgElements =
+    document.querySelectorAll<SVGElement>("svg.beam-container");
+
+  for (const svgElement of svgElements) {
+    const {
+      containerId,
+      fromId,
+      toId,
+      curvature,
+      startXOffset,
+      startYOffset,
+      endXOffset,
+      endYOffset,
+    } = svgElement.dataset;
+
+    if (!containerId || !fromId || !toId) {
+      console.error("Missing required data attributes");
+      continue;
+    }
+
+    const containerElement = document.getElementById(containerId);
+    const fromElement = document.getElementById(fromId);
+    const toElement = document.getElementById(toId);
+
+    if (!containerElement || !fromElement || !toElement) {
+      console.error("One or more elements not found");
+      continue;
+    }
+
+    const updatePathAndSvg = () => {
+      updatePath(containerElement, svgElement, fromElement, toElement, {
+        curvature: parseFloat(curvature || "0"),
+        startXOffset: parseFloat(startXOffset || "0"),
+        startYOffset: parseFloat(startYOffset || "0"),
+        endXOffset: parseFloat(endXOffset || "0"),
+        endYOffset: parseFloat(endYOffset || "0"),
+      });
+    };
+
+    const resizeObserver = new ResizeObserver(updatePathAndSvg);
+
+    if (containerElement) {
+      resizeObserver.observe(containerElement);
+    }
+
+    updatePathAndSvg();
+
+    window.addEventListener("unload", () => {
+      resizeObserver.disconnect();
+    });
+  }
+</script>
